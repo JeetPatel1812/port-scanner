@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PortScan - Simple Port Scanner</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+<div class="container">
+
+  <div class="topbar">
+    <div class="logo-icon">🔍</div>
+    <div>
+      <div class="logo-text">PortScan</div>
+      <div class="logo-sub">Network port scanner</div>
+    </div>
+  </div>
+
+  <div class="scan-card">
+    <p class="section-label">Target</p>
+    <div class="scan-input-row">
+      <input type="text" id="targetInput"
+        placeholder="IP address or domain — e.g. scanme.nmap.org" />
+      <button class="btn-scan" id="scanBtn" onclick="startScan()">
+        🔍 Scan
+      </button>
+    </div>
+    <div class="selects-row">
+      <div class="sel-group">
+        <label>Port range</label>
+        <select id="portRange">
+          <option value="common">Common ports (top 20)</option>
+          <option value="all">All ports (1–1024)</option>
+          <option value="1-500">1 – 500</option>
+          <option value="1-100">1 – 100</option>
+        </select>
+      </div>
+      <div class="sel-group">
+        <label>Scan speed</label>
+        <select id="scanSpeed">
+          <option value="normal">Normal</option>
+          <option value="fast">Fast</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-bar" id="statusBar" style="display:none;">
+    <div class="spinner"></div>
+    <span id="statusText">Scanning...</span>
+  </div>
+
+  <div class="metrics" id="summaryCards" style="display:none;">
+    <div class="metric"><div class="metric-label">Target</div><div class="metric-val" id="cardTarget" style="font-size:11px">—</div></div>
+    <div class="metric"><div class="metric-label">IP address</div><div class="metric-val" id="cardIP" style="font-size:11px">—</div></div>
+    <div class="metric"><div class="metric-label">Open ports</div><div class="metric-val purple" id="cardOpen">—</div></div>
+    <div class="metric"><div class="metric-label">Scanned</div><div class="metric-val" id="cardTotal">—</div></div>
+    <div class="metric"><div class="metric-label">Duration</div><div class="metric-val" id="cardDuration">—</div></div>
+  </div>
+
+  <div class="filter-row" id="filterRow" style="display:none;">
+    <button class="fbtn active" onclick="filterResults('all', this)">All</button>
+    <button class="fbtn" onclick="filterResults('open', this)">Open only</button>
+    <button class="fbtn" onclick="filterResults('closed', this)">Closed only</button>
+    <button class="export-btn" onclick="exportResults()">⬇ Export</button>
+  </div>
+
+  <div class="results-box" id="resultsBox" style="display:none;">
+    <table>
+      <thead>
+        <tr><th>Port</th><th>Service</th><th>Status</th></tr>
+      </thead>
+      <tbody id="resultsBody"></tbody>
+    </table>
+  </div>
+
+  <div class="error-box" id="errorBox" style="display:none;"></div>
+
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
