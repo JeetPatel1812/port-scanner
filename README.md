@@ -7,7 +7,12 @@ Scan any IP or domain for open ports directly from your browser.
 ![Flask](https://img.shields.io/badge/Flask-2.x-lightgrey)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
+## Screenshot
+
+![PortScan App](assets/screenshot.png)
+
 ---
+
 
 ## Features
 
